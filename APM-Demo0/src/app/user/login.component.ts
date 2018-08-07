@@ -6,6 +6,8 @@ import { AuthService } from './auth.service';
 import { Store} from '@ngrx/store';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import * as fromRoot from "../state/app.state";
+import * as fromUser from "../user/state/auth.reducer";
 
 @Component({
   templateUrl: './login.component.html',
@@ -23,17 +25,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(private authService: AuthService,
-              private router: Router, private store: Store<any>) {
+              private router: Router, private store: Store<fromRoot.state>) {
   }
 
   ngOnInit(): void {
-    this.subscription = this.store.select('users').subscribe(
-      usr => {
-        if(usr)
-        {
-          this.maskUserName = usr.maskUserName;
-        }
-      }
+    this.subscription = this.store.select(fromUser.getMaskUserName).subscribe(
+      maskUserName => 
+          this.maskUserName = maskUserName
     )
   }
 

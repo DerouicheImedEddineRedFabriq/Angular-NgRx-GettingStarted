@@ -1,4 +1,20 @@
-export function reducer(state, action)
+import { createFeatureSelector, createSelector } from "@ngrx/store";
+
+export interface userState
+{
+    maskUserName: boolean,
+}
+
+const initialUserState: userState =
+{
+    maskUserName: true
+}
+
+const getUserStateFeateSelector = createFeatureSelector<userState>('users');
+
+export const getMaskUserName = createSelector(getUserStateFeateSelector, state => state.maskUserName);
+
+export function reducer(state = initialUserState, action)
 {
     switch(action.type)
     {
