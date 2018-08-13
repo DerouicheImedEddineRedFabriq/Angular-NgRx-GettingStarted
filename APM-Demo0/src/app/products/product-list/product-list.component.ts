@@ -7,6 +7,7 @@ import { ProductService } from '../product.service';
 import { Store } from '@ngrx/store';
 import * as fromProductState from 'src/app/products/state/product.reducer';
 import * as fromProductActions  from "../../products/actions/product.actions";
+import { ProductActionsTypes } from '../../products/actions/product.actions';
 
 @Component({
   selector: 'pm-product-list',
@@ -35,10 +36,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
       selectedProduct => this.selectedProduct = selectedProduct
     );
 
-    this.productService.getProducts().subscribe(
-      (products: Product[]) => this.products = products,
-      (err: any) => this.errorMessage = err.error
-    );
+    this.store.dispatch(new fromProductActions.LoadAction);
+    //this.productService.getProducts().subscribe(
+    //  (products: Product[]) => this.products = products,
+   //   (err: any) => this.errorMessage = err.error
+  //  );
   }
 
   ngOnDestroy(): void {
