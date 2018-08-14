@@ -8,7 +8,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { StoreModule} from '@ngrx/store';
 import { reducer } from './state/product.reducer';
-import { EffectsModule } from '@ngrx/effects/src/effects_module';
+import { EffectsModule } from '@ngrx/effects';
 import { ProductEffects } from 'src/app/products/state/product.effects';
 
 const productRoutes: Routes = [
